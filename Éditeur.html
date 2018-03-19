@@ -7,12 +7,47 @@
   </head>
 <body>
   <div id="container"></div>
-  <canvas id="myCanvas" width="625" height="625" style="border:1px solid #000000;">
+  <canvas id="myCanvas" width="1200" height="800" style="border:1px solid #000000;">
   Your browser does not support the HTML5 canvas tag.</canvas>
-  <script src="three.js"></script>
   <script src="js/renderers/CanvasRenderer.js"></script>
-  <script type="text/javascript">
-  //go la mec https://www.w3schools.com/tags/canvas_lineto.asp
+	<script type="text/javascript">
+	//constantes
+	const SIZE_SQUARE = 25;
+	const NB_COL = 25;
+	const NB_ROW = 25;
+ 	//////////////////////////////DÉCLARATION DES OBJETS////////////////////////////
+	function windowCanvas()
+ 	{
+ 		//attributs
+ 		var canvas = document.getElementById("myCanvas");
+ 		var ctx = canvas.getContext("2d");
+ 		var floors = new Array();
+ 		var roomTypes = new Map();
+ 		var selectedFloor = 0;
+ 		
+ 		//méthodes
+ 		this.WhereCursorIs = function()
+ 		{
+ 			return 0;
+ 		};
+ 		this.GetCanvas = function(){return canvas;};
+ 		this.GetCtx= function(){return ctx;};
+ 		this.GetFloors = function(){return floors;};
+ 		this.GetRoomTypes = function(){return roomTypes;};
+ 		this.GetSelectedRoom = function(){return selectedRoom;};
+ 		this.NewFloor = function()
+ 		{
+ 			floors.push([]);
+ 			floors[floors.lenght-1][1]=0;///////////PROBLEME
+ 		}
+ 	}
+	///////////////////////////////PROGRAMME///////////////////////
+	mainWindow = new windowCanvas();
+	mainWindow.NewFloor();
+	console.log(mainWindow.GetFloors().length);
+  	console.log("Fin du programme");
+  /*
+  //go la, mec https://www.w3schools.com/tags/canvas_lineto.asp
 	//objet map attribut	: nbCol;nbRow;c;ctx
 	//objet map methodes	: Draw();
 	
@@ -80,7 +115,7 @@
 	map.InitMatrix();
 	map.Draw();
 	mouse_position();
-
-  </script>
+*/
+	</script>
 </body>
 </html>

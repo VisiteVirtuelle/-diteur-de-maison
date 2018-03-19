@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_luTUUPrQEeeawv7hUK1Dow" name="RootElement">
+  <packagedElement xmi:type="uml:Package" xmi:id="_sccnUPrQEeeawv7hUK1Dow" name="UML" visibility="package">
+    <packagedElement xmi:type="uml:Class" xmi:id="_GuURQPrUEeeawv7hUK1Dow" name="window" visibility="public">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zi6iQCt5Eei584fYRHJcxQ" name="contFloors" type="_BZi64Ct6Eei584fYRHJcxQ"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_cwGcUCt6Eei584fYRHJcxQ" name="contRoomType" type="_B6LGQCt7Eei584fYRHJcxQ"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_fBDV0Ct7Eei584fYRHJcxQ" name="ctx"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_iK_iQCt7Eei584fYRHJcxQ" name="canvas"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_J6FJ0CuAEei584fYRHJcxQ" name="InitWindow">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_xjXBICuAEei584fYRHJcxQ" name="getCanvas"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_C1rNkBCSEeioo-48y0HB3g" name="WhereCursorIs"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_PTbRQCt5Eei584fYRHJcxQ" name="floor">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_weTFQCt6Eei584fYRHJcxQ" name="matrix">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EByteArray"/>
+        </ownedAttribute>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_uCH9wCt6Eei584fYRHJcxQ" name="DrawFloor"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_MePoUCuDEei584fYRHJcxQ" name="InitFloor"/>
+        <nestedClassifier xmi:type="uml:Class" xmi:id="_BZi64Ct6Eei584fYRHJcxQ" name="floor"/>
+      </nestedClassifier>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_B6LGQCt7Eei584fYRHJcxQ" name="roomType">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_QFANQCt7Eei584fYRHJcxQ" name="name">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="__7o40CuBEei584fYRHJcxQ" name="color" visibility="public"/>
+      <nestedClassifier xmi:type="uml:PrimitiveType" xmi:id="_K0Bb0Ct7Eei584fYRHJcxQ" name="Map"/>
+    </packagedElement>
+  </packagedElement>
+  <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_ilqsECt7Eei584fYRHJcxQ">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_iltIUCt7Eei584fYRHJcxQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <references xmi:type="ecore:EPackage" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#_Kv8EIKFXEeS_KNX0nfvIVQ"/>
+    </eAnnotations>
+    <appliedProfile xmi:type="uml:Profile" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#ActionLanguage"/>
+  </profileApplication>
+</uml:Model>
