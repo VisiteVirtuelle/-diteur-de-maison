@@ -9,13 +9,41 @@
       <ownedAttribute xmi:type="uml:Property" xmi:id="_Vh1nYCuREei584fYRHJcxQ" name="selectedFloor">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedAttribute>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_C1rNkBCSEeioo-48y0HB3g" name="WhereCursorIs"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_ZEyugCxGEeit494qKPD1KA" name="mouseCursor"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_0CDrkCxZEeit494qKPD1KA" name="selectedRoomType"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_XU80oCxeEeit494qKPD1KA" name="isMouseDown"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_C1rNkBCSEeioo-48y0HB3g" name="GetMouseCursor"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_qTBh4CuSEei584fYRHJcxQ" name="GetCanvas"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_r91d4CuSEei584fYRHJcxQ" name="GetCtx"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_wXb7YCuSEei584fYRHJcxQ" name="GetFloors"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_yd3cYCuSEei584fYRHJcxQ" name="GetRoomTypes"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_1Hi0YCuSEei584fYRHJcxQ" name="GetSelectedFloor"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_xgv3YCuTEei584fYRHJcxQ" name="NewFloor" concurrency="guarded"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_g6kDoCwUEeit494qKPD1KA" name="DrawFloor"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_QJ3poCxAEeit494qKPD1KA" name="DrawRoomTypes"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_e9iDgCxGEeit494qKPD1KA" name="SetMouseCursor"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_ICgOACxNEeit494qKPD1KA" name="FloorCaseHovering"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_K3e3ECxNEeit494qKPD1KA" name="RoomTypeHovering"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_3hH60CxWEeit494qKPD1KA" name="SetCaseFloor">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_90c6ECxWEeit494qKPD1KA" name="floor">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_B39y0CxXEeit494qKPD1KA" name="posx">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_DpRYYCxXEeit494qKPD1KA" name="posy">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_BjAIECxaEeit494qKPD1KA" name="SetSelectedRoomType">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_GRepYCxaEeit494qKPD1KA" name="idRoomType"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_dh--oCxeEeit494qKPD1KA" name="SetMouseDown" visibility="private">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_iWJRMCxeEeit494qKPD1KA" name="isDown">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_qnYuoCxeEeit494qKPD1KA" name="IsMouseDown"/>
     </packagedElement>
   </packagedElement>
   <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_ilqsECt7Eei584fYRHJcxQ">

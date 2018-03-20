@@ -11,19 +11,34 @@
 		style="border: 1px solid #000000;">
   Your browser does not support the HTML5 canvas tag.</canvas>
 	<script src="js/renderers/CanvasRenderer.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		"use strict";
 		//constantes
 		const
 		SIZE_SQUARE = 25;
 		const
-		NB_COL = 10;
+		NB_COL = 20;
 		const
-		NB_ROW = 15;
+		NB_ROW = 20;
 		const
 		STAGE_INIT_VALUE = 0;
 		const
 		MAX_ROOM_TYPE = 99;
+		const
+		SPACE_MATRIX_ROOM_TYPE = 50;
+		const
+		MATRIX_OFFSET = {
+			x : 0,
+			y : 0
+		};
+		const
+		ROOM_TYPES_OFFSET = {
+			x : SIZE_SQUARE * NB_COL + SPACE_MATRIX_ROOM_TYPE + 10,
+			y : 20
+		};
+
 		//////////////////////////////DÉCLARATION DES OBJETS////////////////////////////
 		function windowCanvas() {
 			//attributs
@@ -32,10 +47,25 @@
 			var floors = new Array();
 			var roomTypes = new Map();
 			var selectedFloor = 0;
+			roomTypes.set(0, "#D0D0D0");//Gris (Vide)
+			roomTypes.set(1, "#FF2D00");//Rouge
+			roomTypes.set(2, "#B86F3C");//Marron
+			roomTypes.set(3, "#E3EE01");//Jaune
+			roomTypes.set(4, "#89EE01");//Vert
+			roomTypes.set(5, "#01EEE0");//Cyan
+			roomTypes.set(6, "#0121EE");//Bleu
+			roomTypes.set(7, "#7400FF");//Mauve
+			roomTypes.set(8, "#FF00E8");//Magenta
+			var mouseCursor = {
+				x : -1,
+				y : -1
+			};
+			var selectedRoomType = 0;
+			var isMouseDown = false;
 
 			//méthodes
-			this.WhereCursorIs = function() {
-				return 0;
+			this.GetMouseCursor = function() {
+				return mouseCursor;
 			};
 			this.GetCanvas = function() {
 				return canvas;
@@ -52,6 +82,10 @@
 			this.GetSelectedFloor = function() {
 				return selectedFloor;
 			};
+			this.SetMouseCursor = function(posx, posy) {
+				mouseCursor.x = posx;
+				mouseCursor.y = posy;
+			}
 			this.NewFloor = function() {
 				var stage = new Array();
 				floors.push(stage); //nouveau étage
@@ -71,116 +105,140 @@
 					for ( var j = 0; j < NB_ROW; j++) {
 
 						ctx.fillStyle = roomTypes.get(tempFloor[i][j]);
-						ctx.fillRect(i * SIZE_SQUARE, j * SIZE_SQUARE,
-								SIZE_SQUARE, SIZE_SQUARE);
+						ctx.fillRect(i * SIZE_SQUARE + MATRIX_OFFSET.x, j
+								* SIZE_SQUARE + MATRIX_OFFSET.y, SIZE_SQUARE,
+								SIZE_SQUARE);
 					}
 				}
 				for ( var i = 0; i < NB_ROW + 1; i++) {//affichage des ligne horizontales
 					ctx.beginPath();
-					ctx.moveTo(0, i * SIZE_SQUARE);
-					ctx.lineTo(SIZE_SQUARE * NB_COL, i * SIZE_SQUARE);
+					ctx.moveTo(MATRIX_OFFSET.x, i * SIZE_SQUARE
+							+ MATRIX_OFFSET.y);
+					ctx.lineTo(SIZE_SQUARE * NB_COL + MATRIX_OFFSET.x, i
+							* SIZE_SQUARE + MATRIX_OFFSET.y);
 					ctx.stroke();
 				}
 				for ( var i = 0; i < NB_COL + 1; i++) {//affichage des ligne verticales
 					ctx.beginPath();
-					ctx.moveTo(i * SIZE_SQUARE, 0);
-					ctx.lineTo(i * SIZE_SQUARE, SIZE_SQUARE * NB_ROW);
+					ctx.moveTo(i * SIZE_SQUARE + MATRIX_OFFSET.x,
+							MATRIX_OFFSET.y);
+					ctx.lineTo(i * SIZE_SQUARE + MATRIX_OFFSET.x, SIZE_SQUARE
+							* NB_ROW + MATRIX_OFFSET.y);
 					ctx.stroke();
 				}
-				console.log("Étage déssiné !");
+				//console.log("Étage déssiné !");
 			}
-			this.NewRoomType = function(nameType, color) {
-				if (roomTypes.get(nameType)) {
-					console.log("ce nameType a déjà été créée");
-					return;
+			this.DrawRoomTypes = function() {
+				for ( var i = 0; i < roomTypes.size; i++) {
+					ctx.fillStyle = roomTypes.get(i);
+					ctx.fillRect(SIZE_SQUARE * i + ROOM_TYPES_OFFSET.x,
+							ROOM_TYPES_OFFSET.y, SIZE_SQUARE, SIZE_SQUARE);
 				}
-				if (nameType == 0) {
-					roomTypes.set(nameType, "#F0F0F0");
-					console.log("roomType vide créée");
-					return;
+				for ( var i = 0; i < 1 + 1; i++) {//affichage des ligne horizontales
+					ctx.beginPath();
+					ctx.moveTo(ROOM_TYPES_OFFSET.x, i * SIZE_SQUARE
+							+ ROOM_TYPES_OFFSET.y);
+					ctx.lineTo(SIZE_SQUARE * roomTypes.size
+							+ ROOM_TYPES_OFFSET.x, i * SIZE_SQUARE
+							+ ROOM_TYPES_OFFSET.y);
+					ctx.stroke();
 				}
-				roomTypes.set(nameType, "#" + color);
-				console.log("nouvelle roomType : " + '"' + nameType + '"'
-						+ " de couleur " + color);
+				for ( var i = 0; i < roomTypes.size + 1; i++) {//affichage des ligne verticales
+					ctx.beginPath();
+					ctx.moveTo(SIZE_SQUARE * i + ROOM_TYPES_OFFSET.x,
+							ROOM_TYPES_OFFSET.y);
+					ctx.lineTo(SIZE_SQUARE * i + ROOM_TYPES_OFFSET.x,
+							SIZE_SQUARE + ROOM_TYPES_OFFSET.y);
+					ctx.stroke();
+				}
+			}
+			this.FloorCaseHovering = function() {
+				var posx = Math.floor((mouseCursor.x - MATRIX_OFFSET.x)
+						/ SIZE_SQUARE);
+				var posy = Math.floor((mouseCursor.y - MATRIX_OFFSET.y)
+						/ SIZE_SQUARE);
+				if ((posx >= NB_COL) || (posx < 0) || (posy >= NB_ROW)
+						|| (posy < 0))
+					return {
+						x : null,
+						y : null
+					};
+				return {
+					x : posx,
+					y : posy
+				};
+			}
+			this.RoomTypeHovering = function() {
+				var posx = Math.floor((mouseCursor.x - ROOM_TYPES_OFFSET.x)
+						/ SIZE_SQUARE);
+				var posy = Math.floor((mouseCursor.y - ROOM_TYPES_OFFSET.y)
+						/ SIZE_SQUARE);
+				if ((posx >= roomTypes.size) || (posx < 0) || (posy >= 1)
+						|| (posy < 0))
+					return {
+						x : null,
+						y : null
+					};
+				return {
+					x : posx,
+					y : posy
+				};
+			}
+			this.SetCaseFloor = function(floor, posx, posy) {
+				if ((posx == null) || (posy == null))
+					return;
+				floors[floor][posx][posy] = selectedRoomType;
+			}
+			this.SetSelectedRoomType = function(idRoomType) {
+				if ((idRoomType > roomTypes.size) || (idRoomType < 0)
+						|| (idRoomType == null))
+					return;
+
+				selectedRoomType = idRoomType;
+				console.log("selectedRoomType " + idRoomType);
+			}
+			this.SetMouseDown = function(isDown) {
+				isMouseDown = isDown;
+			}
+			this.IsMouseDown = function() {
+				return isMouseDown;
 			}
 		}
 		///////////////////////////////PROGRAMME///////////////////////
 		var mainWindow = new windowCanvas();
 		mainWindow.NewFloor();
-		mainWindow.NewRoomType(0, "");
-		mainWindow.NewRoomType("salle de bain", "FF0000");
 		mainWindow.DrawFloor(mainWindow.GetSelectedFloor());
-		console.log("Fin du programme");
-		/*
-		//go la, mec https://www.w3schools.com/tags/canvas_lineto.asp
-		//objet map attribut	: nbCol;nbRow;c;ctx
-		//objet map methodes	: Draw();
-		
-		//CONSANTE
-		const SIZE_SQUARE = 25;
-		
-		//Déclaration des variables et objets + initialisation
-		var map = {};
-		map.nbCol = map.nbRow = 25;
-		
-		map.c = document.getElementById("myCanvas");
-		map.ctx = map.c.getContext("2d");
-		
-		map.matrix = [];
-		
-		map.InitMatrix = function(){
-			for(var i = 0; i < map.nbCol; i++)
-			{
-				for(var j = 0; j < map.nbCol; j++)
-				{
-					map.matrix[i,j]=0;
-				}
-			}
+		mainWindow.DrawRoomTypes();
+
+		function CursorUpdate(e) {//tracking souris
+			var pos = getMousePos(mainWindow.GetCanvas(), e);
+			var posx = pos.x;
+			var posy = pos.y;
+			mainWindow.SetMouseCursor(posx, posy);
+			pos.x = mainWindow.FloorCaseHovering().x;
+			pos.y = mainWindow.FloorCaseHovering().y;
+			mainWindow.SetSelectedRoomType(mainWindow.RoomTypeHovering().x);
+			mainWindow.SetCaseFloor(0, pos.x, pos.y);
+			mainWindow.DrawFloor(0);
 		}
-		
-		map.Draw = function(){
-			if((map.nbCol<=0)||(map.nbRow<=0))
-			{
-				alert("le nombre de collones ou de ligne est inssufissant");
-				return;
-			}
-			for(var i = 0; i < map.nbRow + 1; i++)
-			{//affichage des ligne horizontales
-				map.ctx.beginPath();
-				map.ctx.moveTo(0,i*SIZE_SQUARE);
-				map.ctx.lineTo(625,i*SIZE_SQUARE);
-				map.ctx.stroke();
-			}
-			for(var i = 0; i < map.nbCol + 1; i++)
-			{//affichage des ligne verticales
-				map.ctx.beginPath();
-				map.ctx.moveTo(i*SIZE_SQUARE,0);
-				map.ctx.lineTo(i*SIZE_SQUARE,625);
-				map.ctx.stroke();						
-			}
-		}
-		
-		  //Initialisation du tracking de la souris
-		function GetMousePos(canvas, evt)
-		{
+		window.addEventListener('mousemove', CursorUpdate, false);
+		function getMousePos(canvas, evt) {
 			var rect = canvas.getBoundingClientRect();
+			mainWindow.SetMouseCursor((evt.clientX - rect.left)
+					/ (rect.right - rect.left) * canvas.width,
+					(evt.clientY - rect.top) / (rect.bottom - rect.top)
+							* canvas.height)
 			return {
-				x: evt.clientX - rect.left;
-				y: evt.clientY - rect.top;
-			}
-		}
-		
-			map.c.addEventListener('onmousedown', function(evt){
-				var mousePos = GetMousePos(map.c, evt);
-				var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-				writeMessage(map.c, message);
-			}, false);
-		}
-		
-		map.InitMatrix();
-		map.Draw();
-		mouse_position();
-		 */
+				x : (evt.clientX - rect.left) / (rect.right - rect.left)
+						* canvas.width,
+				y : (evt.clientY - rect.top) / (rect.bottom - rect.top)
+						* canvas.height
+			};
+		}//fin du tracking
+		console.log("Fin du programme");
+		$(document).mousedown(function() {
+			console.log("mousedown");
+		})
 	</script>
 </body>
 </html>
