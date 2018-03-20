@@ -1,30 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_luTUUPrQEeeawv7hUK1Dow" name="RootElement">
   <packagedElement xmi:type="uml:Package" xmi:id="_sccnUPrQEeeawv7hUK1Dow" name="UML" visibility="package">
-    <packagedElement xmi:type="uml:Class" xmi:id="_GuURQPrUEeeawv7hUK1Dow" name="window" visibility="public">
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_zi6iQCt5Eei584fYRHJcxQ" name="contFloors" type="_BZi64Ct6Eei584fYRHJcxQ"/>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_cwGcUCt6Eei584fYRHJcxQ" name="contRoomType" type="_B6LGQCt7Eei584fYRHJcxQ"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_GuURQPrUEeeawv7hUK1Dow" name="windowCanvas" visibility="public">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zi6iQCt5Eei584fYRHJcxQ" name="floors"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_cwGcUCt6Eei584fYRHJcxQ" name="roomTypes"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_fBDV0Ct7Eei584fYRHJcxQ" name="ctx"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_iK_iQCt7Eei584fYRHJcxQ" name="canvas"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_J6FJ0CuAEei584fYRHJcxQ" name="InitWindow">
-        <ownedParameter xmi:type="uml:Parameter" xmi:id="_xjXBICuAEei584fYRHJcxQ" name="getCanvas"/>
-      </ownedOperation>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_C1rNkBCSEeioo-48y0HB3g" name="WhereCursorIs"/>
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_PTbRQCt5Eei584fYRHJcxQ" name="floor">
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_weTFQCt6Eei584fYRHJcxQ" name="matrix">
-          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EByteArray"/>
-        </ownedAttribute>
-        <ownedOperation xmi:type="uml:Operation" xmi:id="_uCH9wCt6Eei584fYRHJcxQ" name="DrawFloor"/>
-        <ownedOperation xmi:type="uml:Operation" xmi:id="_MePoUCuDEei584fYRHJcxQ" name="InitFloor"/>
-        <nestedClassifier xmi:type="uml:Class" xmi:id="_BZi64Ct6Eei584fYRHJcxQ" name="floor"/>
-      </nestedClassifier>
-    </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_B6LGQCt7Eei584fYRHJcxQ" name="roomType">
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_QFANQCt7Eei584fYRHJcxQ" name="name">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_Vh1nYCuREei584fYRHJcxQ" name="selectedFloor">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="__7o40CuBEei584fYRHJcxQ" name="color" visibility="public"/>
-      <nestedClassifier xmi:type="uml:PrimitiveType" xmi:id="_K0Bb0Ct7Eei584fYRHJcxQ" name="Map"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_C1rNkBCSEeioo-48y0HB3g" name="WhereCursorIs"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_qTBh4CuSEei584fYRHJcxQ" name="GetCanvas"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_r91d4CuSEei584fYRHJcxQ" name="GetCtx"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_wXb7YCuSEei584fYRHJcxQ" name="GetFloors"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_yd3cYCuSEei584fYRHJcxQ" name="GetRoomTypes"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_1Hi0YCuSEei584fYRHJcxQ" name="GetSelectedFloor"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_xgv3YCuTEei584fYRHJcxQ" name="NewFloor" concurrency="guarded"/>
     </packagedElement>
   </packagedElement>
   <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_ilqsECt7Eei584fYRHJcxQ">
