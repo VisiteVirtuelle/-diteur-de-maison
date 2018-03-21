@@ -17,11 +17,11 @@
 		"use strict";
 		//constantes
 		const
-		SIZE_SQUARE = 25;
+		SIZE_SQUARE = 20;
 		const
-		NB_COL = 20;
+		NB_COL = 35;
 		const
-		NB_ROW = 20;
+		NB_ROW = 35;
 		const
 		STAGE_INIT_VALUE = 0;
 		const
@@ -62,6 +62,10 @@
 			};
 			var selectedRoomType = 0;
 			var isMouseDown = false;
+			var cursorPosition = {
+				x : null,
+				y : null
+			};
 
 			//méthodes
 			this.GetMouseCursor = function() {
@@ -82,9 +86,16 @@
 			this.GetSelectedFloor = function() {
 				return selectedFloor;
 			};
+			this.GetSelectedRoomType = function() {
+				return selectedRoomType;
+			};
 			this.SetMouseCursor = function(posx, posy) {
 				mouseCursor.x = posx;
 				mouseCursor.y = posy;
+			};
+			this.SetMousePosition = function(posx, posy) {
+				cursorPosition.x = posx;
+				cursorPosition.x = posy;
 			}
 			this.NewFloor = function() {
 				var stage = new Array();
@@ -98,8 +109,8 @@
 				}
 				if (floors.lenght == 0)
 					console.log("Étage créé !");
-			}
-			this.DrawFloor = function(selectedFloor) {
+			};
+			this.DrawFloor = function() {
 				var tempFloor = floors[selectedFloor];
 				for ( var i = 0; i < NB_COL; i++) {
 					for ( var j = 0; j < NB_ROW; j++) {
@@ -127,7 +138,7 @@
 					ctx.stroke();
 				}
 				//console.log("Étage déssiné !");
-			}
+			};
 			this.DrawRoomTypes = function() {
 				for ( var i = 0; i < roomTypes.size; i++) {
 					ctx.fillStyle = roomTypes.get(i);
@@ -151,7 +162,18 @@
 							SIZE_SQUARE + ROOM_TYPES_OFFSET.y);
 					ctx.stroke();
 				}
-			}
+
+				ctx.beginPath();
+				ctx.moveTo(selectedRoomType * SIZE_SQUARE * i
+						+ ROOM_TYPES_OFFSET.x, ROOM_TYPES_OFFSET.y);
+				ctx.lineTo(selectedRoomType * SIZE_SQUARE * i
+						+ ROOM_TYPES_OFFSET.x, SIZE_SQUARE
+						+ ROOM_TYPES_OFFSET.y);
+				ctx.strokeStyle = "#FF0000";
+				ctx.stroke();
+
+				ctx.strokeStyle = "#FF0000";
+			};
 			this.FloorCaseHovering = function() {
 				var posx = Math.floor((mouseCursor.x - MATRIX_OFFSET.x)
 						/ SIZE_SQUARE);
@@ -167,7 +189,7 @@
 					x : posx,
 					y : posy
 				};
-			}
+			};
 			this.RoomTypeHovering = function() {
 				var posx = Math.floor((mouseCursor.x - ROOM_TYPES_OFFSET.x)
 						/ SIZE_SQUARE);
@@ -183,62 +205,71 @@
 					x : posx,
 					y : posy
 				};
-			}
-			this.SetCaseFloor = function(floor, posx, posy) {
+			};
+			this.SetCaseFloor = function(posx, posy) {
 				if ((posx == null) || (posy == null))
 					return;
-				floors[floor][posx][posy] = selectedRoomType;
-			}
+				floors[selectedFloor][posx][posy] = selectedRoomType;
+			};
 			this.SetSelectedRoomType = function(idRoomType) {
 				if ((idRoomType > roomTypes.size) || (idRoomType < 0)
 						|| (idRoomType == null))
 					return;
 
 				selectedRoomType = idRoomType;
-				console.log("selectedRoomType " + idRoomType);
-			}
+				//console.log("selectedRoomType " + idRoomType);
+			};
 			this.SetMouseDown = function(isDown) {
 				isMouseDown = isDown;
-			}
+			};
 			this.IsMouseDown = function() {
 				return isMouseDown;
-			}
+			};
 		}
 		///////////////////////////////PROGRAMME///////////////////////
 		var mainWindow = new windowCanvas();
 		mainWindow.NewFloor();
-		mainWindow.DrawFloor(mainWindow.GetSelectedFloor());
+		mainWindow.DrawFloor();
 		mainWindow.DrawRoomTypes();
 
-		function CursorUpdate(e) {//tracking souris
-			var pos = getMousePos(mainWindow.GetCanvas(), e);
-			var posx = pos.x;
-			var posy = pos.y;
-			mainWindow.SetMouseCursor(posx, posy);
-			pos.x = mainWindow.FloorCaseHovering().x;
-			pos.y = mainWindow.FloorCaseHovering().y;
-			mainWindow.SetSelectedRoomType(mainWindow.RoomTypeHovering().x);
-			mainWindow.SetCaseFloor(0, pos.x, pos.y);
-			mainWindow.DrawFloor(0);
-		}
-		window.addEventListener('mousemove', CursorUpdate, false);
-		function getMousePos(canvas, evt) {
-			var rect = canvas.getBoundingClientRect();
-			mainWindow.SetMouseCursor((evt.clientX - rect.left)
-					/ (rect.right - rect.left) * canvas.width,
-					(evt.clientY - rect.top) / (rect.bottom - rect.top)
-							* canvas.height)
-			return {
-				x : (evt.clientX - rect.left) / (rect.right - rect.left)
-						* canvas.width,
-				y : (evt.clientY - rect.top) / (rect.bottom - rect.top)
-						* canvas.height
-			};
-		}//fin du tracking
 		console.log("Fin du programme");
-		$(document).mousedown(function() {
-			console.log("mousedown");
-		})
+
+		$("#myCanvas").mouseup(function() {
+			//console.log("mouseup");
+			mainWindow.SetMouseDown(false);
+		});
+		$("#myCanvas").mousedown(
+				function() {
+
+					mainWindow.SetSelectedRoomType(mainWindow
+							.RoomTypeHovering().x);
+					mainWindow.SetMouseDown(true);
+					console.log("roomTypeSelectionné: "
+							+ mainWindow.GetSelectedRoomType());
+					console.log("roomTypesurvolé: "
+							+ mainWindow.RoomTypeHovering().x + ":"
+							+ mainWindow.RoomTypeHovering().y);
+					if (mainWindow.IsMouseDown()) {
+						mainWindow.SetCaseFloor(
+								mainWindow.FloorCaseHovering().x, mainWindow
+										.FloorCaseHovering().y);
+						mainWindow.DrawFloor();
+					}
+				});
+		$("#myCanvas")
+				.mousemove(
+						function() {
+							var canvas = document.getElementById('myCanvas'), x = event.pageX
+									- canvas.offsetLeft, y = event.pageY
+									- canvas.offsetTop;
+							mainWindow.SetMouseCursor(x, y);
+							if (mainWindow.IsMouseDown()) {
+								mainWindow.SetCaseFloor(mainWindow
+										.FloorCaseHovering().x, mainWindow
+										.FloorCaseHovering().y);
+								mainWindow.DrawFloor();
+							}
+						});
 	</script>
 </body>
 </html>
