@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_luTUUPrQEeeawv7hUK1Dow" name="RootElement">
   <packagedElement xmi:type="uml:Package" xmi:id="_sccnUPrQEeeawv7hUK1Dow" name="UML" visibility="package">
-    <packagedElement xmi:type="uml:Class" xmi:id="_GuURQPrUEeeawv7hUK1Dow" name="windowCanvas" visibility="public">
+    <packagedElement xmi:type="uml:Class" xmi:id="_GuURQPrUEeeawv7hUK1Dow" name="WindowCanvas" visibility="public">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_zi6iQCt5Eei584fYRHJcxQ" name="floors"/>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_cwGcUCt6Eei584fYRHJcxQ" name="roomTypes"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_cwGcUCt6Eei584fYRHJcxQ" name="roomTypes">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EMap"/>
+      </ownedAttribute>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_fBDV0Ct7Eei584fYRHJcxQ" name="ctx"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_iK_iQCt7Eei584fYRHJcxQ" name="canvas"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_Vh1nYCuREei584fYRHJcxQ" name="selectedFloor">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_ZEyugCxGEeit494qKPD1KA" name="mouseCursor"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_ZEyugCxGEeit494qKPD1KA" name="cursorPosition"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_0CDrkCxZEeit494qKPD1KA" name="selectedRoomType"/>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_XU80oCxeEeit494qKPD1KA" name="isMouseDown"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_C1rNkBCSEeioo-48y0HB3g" name="GetMouseCursor"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_XU80oCxeEeit494qKPD1KA" name="isMouseDown">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_rudIYC6jEeizcr8Dsanwsg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_fH0fYC6gEeizcr8Dsanwsg" name="roomTypesName">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EMap"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_gakZUC6jEeizcr8Dsanwsg" name="nbFloor">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_t9J0kC6jEeizcr8Dsanwsg" value="1"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_C1rNkBCSEeioo-48y0HB3g" name="GetCursorPosition"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_qTBh4CuSEei584fYRHJcxQ" name="GetCanvas"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_r91d4CuSEei584fYRHJcxQ" name="GetCtx"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_wXb7YCuSEei584fYRHJcxQ" name="GetFloors"/>
@@ -21,7 +33,7 @@
       <ownedOperation xmi:type="uml:Operation" xmi:id="_xgv3YCuTEei584fYRHJcxQ" name="NewFloor" concurrency="guarded"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_g6kDoCwUEeit494qKPD1KA" name="DrawFloor"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_QJ3poCxAEeit494qKPD1KA" name="DrawRoomTypes"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_e9iDgCxGEeit494qKPD1KA" name="SetMouseCursor"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_e9iDgCxGEeit494qKPD1KA" name="SetCursorPosition"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_ICgOACxNEeit494qKPD1KA" name="FloorCaseHovering"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_K3e3ECxNEeit494qKPD1KA" name="RoomTypeHovering"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_3hH60CxWEeit494qKPD1KA" name="SetCaseFloor">
@@ -44,6 +56,41 @@
         </ownedParameter>
       </ownedOperation>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_qnYuoCxeEeit494qKPD1KA" name="IsMouseDown"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_ms_TQC6bEeizcr8Dsanwsg" name="GetSelectedRoomType"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_wxzN0C6gEeizcr8Dsanwsg" name="GetRoomTypesName"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_6LNlgC6mEeizcr8Dsanwsg" name="CustomButton" visibility="public">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_C97_YC6nEeizcr8Dsanwsg" name="text">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_E46eUC6nEeizcr8Dsanwsg" name="linkedFunction"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_IQrEUC6nEeizcr8Dsanwsg" name="position">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EIntegerObject"/>
+        <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_zYaKEC6oEeizcr8Dsanwsg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_Kjie0C6nEeizcr8Dsanwsg" name="width">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_EjmDsC6pEeizcr8Dsanwsg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_MpISUC6nEeizcr8Dsanwsg" name="height">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_Go9NsC6pEeizcr8Dsanwsg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_Q4wfAC6oEeizcr8Dsanwsg" name="windowcanvas" type="_GuURQPrUEeeawv7hUK1Dow" association="_Q4NFYC6oEeizcr8Dsanwsg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Q4yUMC6oEeizcr8Dsanwsg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Q40JYC6oEeizcr8Dsanwsg" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_bPCWUC6oEeizcr8Dsanwsg" name="mouseClickedIn">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_gD6akC6oEeizcr8Dsanwsg"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_cJLf0C6nEeizcr8Dsanwsg" name="IsMouseClickedIn"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_Q4NFYC6oEeizcr8Dsanwsg" memberEnd="_Q4wfAC6oEeizcr8Dsanwsg _Q5Q1UC6oEeizcr8Dsanwsg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Q4k40C6oEeizcr8Dsanwsg" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Q4lf4C6oEeizcr8Dsanwsg" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_Q5Q1UC6oEeizcr8Dsanwsg" name="custombutton" type="_6LNlgC6mEeizcr8Dsanwsg" association="_Q4NFYC6oEeizcr8Dsanwsg"/>
     </packagedElement>
   </packagedElement>
   <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_ilqsECt7Eei584fYRHJcxQ">
