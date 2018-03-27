@@ -26,6 +26,8 @@ ROOM_TYPES_OFFSET = {
 };
 const
 FONT_SIZE = 30;
+const
+FONT_SIZE_BUTTON = 30;
 
 // ////////////////////////////DÉCLARATION DES
 // OBJETS////////////////////////////
@@ -62,7 +64,9 @@ function WindowCanvas() {
 		x : null,
 		y : null
 	};
+	var buttons = new Array();
 	var nbFloor = 1;
+
 	// méthodes
 	this.GetCursorPosition = function() {
 		return cursorPosition;
@@ -94,7 +98,7 @@ function WindowCanvas() {
 	};
 	this.NewFloor = function() {
 		var stage = new Array();
-		floors.push(stage); // nouvelle étage
+		floors.splice(selectedFloor+1, 0, stage); // nouvelle étage
 		for ( var x = 0; x < NB_COL; x++)
 			stage.push(new Array());
 		for ( var i = 0; i < NB_COL; i++) {
@@ -102,8 +106,21 @@ function WindowCanvas() {
 				stage[i].push(STAGE_INIT_VALUE);
 			}
 		}
-		if (floors.lenght == 0)
-			console.log("Étage créé !");
+		roomTypesName.push(new Map());
+		roomTypesName[roomTypesName.length-1].set(0, "Vide");// Gris (Vide)
+		roomTypesName[roomTypesName.length-1].set(1, "Salle 1");// Rouge
+		roomTypesName[roomTypesName.length-1].set(2, "Salle 2");// Marron
+		roomTypesName[roomTypesName.length-1].set(3, "Salle 3");// Jaune
+		roomTypesName[roomTypesName.length-1].set(4, "Salle 4");// Vert
+		roomTypesName[roomTypesName.length-1].set(5, "Salle 5");// Cyan
+		roomTypesName[roomTypesName.length-1].set(6, "Salle 5");// Bleu
+		roomTypesName[roomTypesName.length-1].set(7, "Salle 6");// Mauve
+		roomTypesName[roomTypesName.length-1].set(8, "Salle 7");// Magenta
+		if(floors.length>1){
+			selectedFloor++;
+			this.DrawFloor();
+		}
+		console.log("Étage créé !" + floors.length);
 	};
 	this.DrawFloor = function() {
 		ctx.strokeStyle = "black";
@@ -238,7 +255,48 @@ function WindowCanvas() {
 	this.IsMouseDown = function() {
 		return isMouseDown;
 	};
-
+	this.DestroyFloor = function(){
+		if(floors.length>1)
+		{
+			floors.splice(selectedFloor,1);
+			roomTypesName.splice(selectedFloor,1);
+			if(selectedFloor>0) selectedFloor--;
+			this.DrawFloor();
+			console.log("étage détruit");
+		}
+		else{
+			console.log("impossible de détruire cette étage");
+		}
+	}
+	this.GoPrevFloor=function(){
+		if(selectedFloor>0)
+		{
+			selectedFloor--;
+			this.DrawFloor();
+			console.log("étage précédant");
+		}else{
+			console.log("impossible d'accéder a l'étage précédant");
+		}
+	}
+	this.GoNextFloor=function(){
+		if(selectedFloor<floors.length-1)
+		{
+			selectedFloor++;
+			this.DrawFloor();
+			console.log("étage suivant");
+		}else{
+			console.log("impossible d'accéder a l'étage suivant");
+		}
+	}
+	this.Save = function(){
+		var XML = new XMLWriter();
+		for(var i=0;i<floors.lenght;i++){
+			XML.BeginNode("Foo");
+			XML.WriteString("Hello World");
+			XML.EndNode();
+		}
+	}
+	// initialisation
 	this.NewFloor();
 }
 // DECLARATION DES VARIABLES NECESSAIRES DU PROGRAMME///////////////////////

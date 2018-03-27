@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_luTUUPrQEeeawv7hUK1Dow" name="RootElement">
+  <packagedElement xmi:type="uml:Package" xmi:id="_sccnUPrQEeeawv7hUK1Dow" name="UML" visibility="package">
+    <packagedElement xmi:type="uml:Class" xmi:id="_XhRq4DG4Eeik29jLlIibuQ" name="Room">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_iK5U8DG4Eeik29jLlIibuQ" name="m_polygone">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EByteArray"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_3Zm48DG5Eeik29jLlIibuQ" name="m_name">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_83ytADHGEeik29jLlIibuQ" name="m_middlePoint">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EIntegerObject"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_UT9k4DG5Eeik29jLlIibuQ" name="DrawRoom"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_AcwBgDHHEeik29jLlIibuQ" name="FindMiddlePoint"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_bluRkDHVEeik29jLlIibuQ" name="PushPolygone"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_1vTCgDHVEeik29jLlIibuQ" name="GetPolygone"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_9zxx8DG3Eeik29jLlIibuQ" name="Floor">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_ADH-YDG4Eeik29jLlIibuQ" name="m_rooms" type="_XhRq4DG4Eeik29jLlIibuQ"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_UegbcDHOEeik29jLlIibuQ" name="m_tempRoom" type="_XhRq4DG4Eeik29jLlIibuQ"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_OHZxcDG4Eeik29jLlIibuQ" name="GetRooms"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_Vyk38DG5Eeik29jLlIibuQ" name="DrawFloor"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_-mCDYDG5Eeik29jLlIibuQ" name="AddRoom"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_OHT98DHQEeik29jLlIibuQ" name="PushPointTempRoom"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_hFdC8DHQEeik29jLlIibuQ" name="ChangeNameTempRoom"/>
+        <nestedClassifier xmi:type="uml:Class" xmi:id="_GuURQPrUEeeawv7hUK1Dow" name="WindowCanvas" visibility="public">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_fBDV0Ct7Eei584fYRHJcxQ" name="m_ctx"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_iK_iQCt7Eei584fYRHJcxQ" name="m_canvas"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_ZEyugCxGEeit494qKPD1KA" name="m_cursorPosition">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EIntegerObject"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_Er118DG4Eeik29jLlIibuQ" name="m_floors" type="_9zxx8DG3Eeik29jLlIibuQ"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_mhTfEDG5Eeik29jLlIibuQ" name="m_roomColors">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EByteArray"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_rbwm4DG5Eeik29jLlIibuQ" name="m_status">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_JNbf4DG6Eeik29jLlIibuQ" name="m_statusValue">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EEnumerator"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_9YlG4DG7Eeik29jLlIibuQ" name="m_selectedFloor"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_C1rNkBCSEeioo-48y0HB3g" name="GetCursorPosition"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_qTBh4CuSEei584fYRHJcxQ" name="GetCanvas"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_r91d4CuSEei584fYRHJcxQ" name="GetCtx"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_NMlkcDG3Eeik29jLlIibuQ" name="SetCursorPosition"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_JFGYYDG8Eeik29jLlIibuQ" name="DrawGrid"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_Yi_QcDHBEeik29jLlIibuQ" name="NewFloor"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_70oU8DHIEeik29jLlIibuQ" name="DeleteFloor"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_GuKRADHOEeik29jLlIibuQ" name="NewRoom"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_6UskgDHOEeik29jLlIibuQ" name="GetStatusValue"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_YwHlIDHPEeik29jLlIibuQ" name="GetStatus"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_o3458DHPEeik29jLlIibuQ" name="SetStatus">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="_sL3zMDHPEeik29jLlIibuQ" name="status">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+            </ownedParameter>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_Hb0rcDHSEeik29jLlIibuQ" name="GetFloors"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_RaG5gDHSEeik29jLlIibuQ" name="GetSelectedFloor"/>
+        </nestedClassifier>
+      </nestedClassifier>
+    </packagedElement>
+  </packagedElement>
+  <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_ilqsECt7Eei584fYRHJcxQ">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_iltIUCt7Eei584fYRHJcxQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <references xmi:type="ecore:EPackage" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#_Kv8EIKFXEeS_KNX0nfvIVQ"/>
+    </eAnnotations>
+    <appliedProfile xmi:type="uml:Profile" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#ActionLanguage"/>
+  </profileApplication>
+</uml:Model>

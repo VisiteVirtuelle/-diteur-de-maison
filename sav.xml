@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<floor>
+	<room>
+		<name> salle de bain </name>
+		<point>10,30</point>
+		<point>20,5</point>
+		<point>5,10</point>
+		<middle>11,15</middle>
+	</room>
+</floor>
