@@ -32,6 +32,19 @@ function Room() {
 	this.GetPolygone = function(){
 		return m_polygone;
 	};
+	this.DrawRoom = function(ctx, color){
+		 ctx = document.getElementById('myCanvas').getContext('2d');
+		 ctx.fillStyle = color;
+		 ctx.beginPath();
+		 ctx.moveTo(m_polygone[0].x, m_polygone[0].y);
+		 for(var i = 1; i < m_polygone.length;i++){
+			 console.log(i);
+			 ctx.lineTo(m_polygone[i].x, m_polygone[i].y);
+		 }
+		 ctx.closePath();
+		 ctx.fill();
+		 console.log("polygone draw");
+	};
 }
 
 function Floor() {
@@ -40,8 +53,12 @@ function Floor() {
 	this.GetRooms = function() {
 		return m_rooms;
 	};
-	this.DrawFloor = function() {
-
+	this.DrawFloor = function(ctx, colors) {
+		var tempColor = "";
+		for(var i =0; i<m_rooms.length;i++){
+			tempColor = colors[i%colors.length];
+			m_rooms[i].DrawRoom(ctx, tempColor);
+		}
 	};
 	this.AddRoom = function() {
 		m_rooms.push(m_tempRoom);
@@ -49,6 +66,7 @@ function Floor() {
 	};
 	this.PushPointTempRoom = function(posx, posy){
 		m_tempRoom.PushPolygone({x:posx,y:posy});
+		console.log("polygone :");
 		console.log(m_tempRoom.GetPolygone());
 	};
 	this.ChangeNameTempRoom = function(name){
@@ -66,7 +84,6 @@ function WindowCanvas() {
 	var m_floors = new Array();
 	var m_roomColors = new Array();
 	m_roomColors.push("LightCoral");
-	m_roomColors.push("LightSalomon");
 	m_roomColors.push("MediumVioletRed");
 	m_roomColors.push("Tomato");
 	m_roomColors.push("SlateBlue");
@@ -74,6 +91,7 @@ function WindowCanvas() {
 	m_roomColors.push("DodgerBlue");
 	m_roomColors.push("BurlyWood");
 	m_roomColors.push("SaddleBrown");
+	m_roomColors.push("Red");
 	var m_status = 0;
 	var m_statusValue = {
 		IDLE : 0,
@@ -101,6 +119,9 @@ function WindowCanvas() {
 	};
 	this.GetSelectedFloor = function(){
 		return m_selectedFloor;
+	}
+	this.GetRoomColors = function(){
+		return m_roomColors;
 	}
 	this.SetCursorPosition = function(posx, posy) {
 		m_cursorPosition.x = posx;
@@ -166,11 +187,13 @@ function WindowCanvas() {
 	m_canvas.addEventListener("contextmenu", (event) => {
         event.preventDefault();
     });
+	this.DrawSelectedFloor = function(){
+		m_floors[m_selectedFloor].DrawFloor(m_ctx, m_roomColors);
+	};
 }
 
 var mainWindow = new WindowCanvas();
 mainWindow.DrawGrid();
-
 
 $("#myCanvas").mousemove(
 		function() {
@@ -192,7 +215,20 @@ $('#myCanvas').mousedown(function(event) {
         case 3:
         	console.log('Right Mouse button pressed.');
         	if(mainWindow.GetStatus() == mainWindow.GetStatusValue().DRAWING_ROOM){
-        		mainWindow.GetFloors()[mainWindow.GetSelectedFloor()].AddRoom();
+        		mainWindow.GetFloors()[mainWindow.GetSelectedFloor()].AddRoom();//ajout de la pièce
+        		//déssin de la pièce
+        		mainWindow.DrawSelectedFloor();
+        		/*mainWindow.GetFloors()[mainWindow.GetSelectedFloor()]
+        			.GetRooms()[mainWindow.GetFloors()[mainWindow.GetSelectedFloor()]
+        				.GetRooms().length-1]
+        					.DrawRoom(
+        							mainWindow.GetCtx(),
+        							mainWindow.GetRoomColors()[
+        							                           (mainWindow.GetFloors()[mainWindow.GetSelectedFloor()]
+        							                           		.GetRooms().length-1)%
+        							                           (mainWindow.GetRoomColors().length)
+        							                           ]
+        					);*/
         		mainWindow.SetStatus(mainWindow.GetStatusValue().IDLE);
         	}
             break;
@@ -200,9 +236,3 @@ $('#myCanvas').mousedown(function(event) {
         	console.log('mouse buttun not assigned');
     }
 });
-/*
- * var m_ctx = document.getElementById('myCanvas').getContext('2d');
- * m_ctx.fillStyle = '#f00'; m_ctx.beginPath(); m_ctx.moveTo(0, 0);
- * m_ctx.lineTo(100, 50); m_ctx.lineTo(50, 100); m_ctx.lineTo(0, 90);
- * m_ctx.closePath(); m_ctx.fill();
- */
