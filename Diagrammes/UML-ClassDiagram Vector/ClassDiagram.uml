@@ -59,6 +59,7 @@
           <ownedOperation xmi:type="uml:Operation" xmi:id="_RaG5gDHSEeik29jLlIibuQ" name="GetSelectedFloor"/>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_fB-ggDKaEei0ZbjQoSNafA" name="GetColors"/>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_KxDBIDKeEei0ZbjQoSNafA" name="DrawSelectedFloor"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_U50BoDMyEeivxp_mbyYrMg" name="GetCursorToGrid"/>
         </nestedClassifier>
       </nestedClassifier>
     </packagedElement>

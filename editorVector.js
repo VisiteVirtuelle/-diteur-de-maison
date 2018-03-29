@@ -61,6 +61,11 @@ function Floor() {
 		}
 	};
 	this.AddRoom = function() {
+		if(m_tempRoom.GetPolygone().length<=2){
+			alert("La Pièce doit contenir plus de points !");
+			m_tempRoom.GetPolygone().splice(0,m_tempRoom.GetPolygone().length);
+			return;
+		}
 		m_rooms.push(m_tempRoom);
 		m_tempRoom = new Room(); 
 	};
@@ -181,13 +186,27 @@ function WindowCanvas() {
 		m_status = m_statusValue.DRAWING_ROOM;
 		console.log("changement d'état :" + m_status)
 	}
-	
+	this.GetCursorToGrid = function(){
+		if(m_cursorPosition.x==null)return;
+		if((m_cursorPosition.x < GRID_OFFSET.x - GRID_SPACING_POINT / 2)||
+				(m_cursorPosition.x > GRID_OFFSET.x + GRID_SPACING_POINT * GRID_NB_COL - GRID_SPACING_POINT / 2)||
+				(m_cursorPosition.y < GRID_OFFSET.y - GRID_SPACING_POINT / 2)||
+				(m_cursorPosition.y > GRID_OFFSET.y + GRID_SPACING_POINT * GRID_NB_ROW - GRID_SPACING_POINT / 2)
+				){
+			return {x : null, y : null};
+		}
+		var tempPoint = {x : null, y : null};
+		tempPoint.x = Math.floor((m_cursorPosition.x - GRID_OFFSET.x + GRID_SPACING_POINT / 2) / GRID_SPACING_POINT);
+		tempPoint.y = Math.floor((m_cursorPosition.y - GRID_OFFSET.y + GRID_SPACING_POINT / 2) / GRID_SPACING_POINT);
+		return tempPoint;
+	};
 	this.NewFloor();
 	// désactivation du menu clique droit
 	m_canvas.addEventListener("contextmenu", (event) => {
         event.preventDefault();
     });
 	this.DrawSelectedFloor = function(){
+		this.DrawGrid();
 		m_floors[m_selectedFloor].DrawFloor(m_ctx, m_roomColors);
 	};
 }
@@ -205,7 +224,13 @@ $('#myCanvas').mousedown(function(event) {
     switch (event.which) {
         case 1:
             console.log('Left Mouse button pressed.');
-            if(mainWindow.GetStatus() == mainWindow.GetStatusValue().DRAWING_ROOM){
+            if((mainWindow.GetStatus() == mainWindow.GetStatusValue().DRAWING_ROOM) &&
+            		(mainWindow.GetCursorToGrid().x!=null)
+            		){
+            	mainWindow.GetCtx().beginPath();
+            	mainWindow.GetCtx().arc(mainWindow.GetCursorPosition().x,mainWindow.GetCursorPosition().y, GRID_CROSS_LENGTH/2, 2*Math.PI, false);
+            	mainWindow.GetCtx().strokeStyle = "yellow";
+            	mainWindow.GetCtx().stroke();
             	mainWindow.GetFloors()[mainWindow.GetSelectedFloor()].PushPointTempRoom(mainWindow.GetCursorPosition().x,mainWindow.GetCursorPosition().y);
             }
             break;
@@ -215,20 +240,10 @@ $('#myCanvas').mousedown(function(event) {
         case 3:
         	console.log('Right Mouse button pressed.');
         	if(mainWindow.GetStatus() == mainWindow.GetStatusValue().DRAWING_ROOM){
-        		mainWindow.GetFloors()[mainWindow.GetSelectedFloor()].AddRoom();//ajout de la pièce
+        		//ajout de la pièce
+        		mainWindow.GetFloors()[mainWindow.GetSelectedFloor()].AddRoom();
         		//déssin de la pièce
         		mainWindow.DrawSelectedFloor();
-        		/*mainWindow.GetFloors()[mainWindow.GetSelectedFloor()]
-        			.GetRooms()[mainWindow.GetFloors()[mainWindow.GetSelectedFloor()]
-        				.GetRooms().length-1]
-        					.DrawRoom(
-        							mainWindow.GetCtx(),
-        							mainWindow.GetRoomColors()[
-        							                           (mainWindow.GetFloors()[mainWindow.GetSelectedFloor()]
-        							                           		.GetRooms().length-1)%
-        							                           (mainWindow.GetRoomColors().length)
-        							                           ]
-        					);*/
         		mainWindow.SetStatus(mainWindow.GetStatusValue().IDLE);
         	}
             break;

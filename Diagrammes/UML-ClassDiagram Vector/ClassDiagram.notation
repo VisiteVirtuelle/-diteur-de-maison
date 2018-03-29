@@ -104,6 +104,10 @@
         <element xmi:type="uml:Operation" href="ClassDiagram.uml#_KxDBIDKeEei0ZbjQoSNafA"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Kxu9oTKeEei0ZbjQoSNafA"/>
       </children>
+      <children xmi:type="notation:Shape" xmi:id="_U6_GUDMyEeivxp_mbyYrMg" type="Operation_ClassOperationLabel">
+        <element xmi:type="uml:Operation" href="ClassDiagram.uml#_U50BoDMyEeivxp_mbyYrMg"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_U6_GUTMyEeivxp_mbyYrMg"/>
+      </children>
       <styles xmi:type="notation:TitleStyle" xmi:id="_GuWGdvrUEeeawv7hUK1Dow"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_GuWGd_rUEeeawv7hUK1Dow"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_GuWGePrUEeeawv7hUK1Dow"/>
@@ -116,7 +120,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_GuWGfvrUEeeawv7hUK1Dow"/>
     </children>
     <element xmi:type="uml:Class" href="ClassDiagram.uml#_GuURQPrUEeeawv7hUK1Dow"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_GuVfYfrUEeeawv7hUK1Dow" x="8" y="10" width="388" height="434"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_GuVfYfrUEeeawv7hUK1Dow" x="8" y="10" width="388" height="466"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_90F7ADG3Eeik29jLlIibuQ" type="Class_Shape">
     <children xmi:type="notation:DecorationNode" xmi:id="_90HwMDG3Eeik29jLlIibuQ" type="Class_NameLabel"/>
@@ -237,7 +241,7 @@
     <element xsi:nil="true"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_MnPmQjG4Eeik29jLlIibuQ" points="[505, 110, -643984, -643984]$[396, 93, -643984, -643984]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Moe8YDG4Eeik29jLlIibuQ" id="(0.0,0.2692307692307692)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Moe8YTG4Eeik29jLlIibuQ" id="(1.0,0.1912442396313364)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Moe8YTG4Eeik29jLlIibuQ" id="(1.0,0.1781115879828326)"/>
   </edges>
   <edges xmi:type="notation:Connector" xmi:id="_hRaIMDG4Eeik29jLlIibuQ" type="Element_ContainmentEdge" source="_XhTgEDG4Eeik29jLlIibuQ" target="_90F7ADG3Eeik29jLlIibuQ">
     <styles xmi:type="notation:FontStyle" xmi:id="_hRaIMTG4Eeik29jLlIibuQ"/>
