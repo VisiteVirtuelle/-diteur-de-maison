@@ -6,21 +6,31 @@ GRID_OFFSET = {
 	y : 20
 };
 const
-GRID_NB_ROW = 25;
+GRID_NB_ROW = 30;
 const
-GRID_NB_COL = 25;
+GRID_NB_COL = 30;
 const
-GRID_SPACING_POINT = 15;
+GRID_SPACING_POINT = 20;
 const
-GRID_CROSS_LENGTH = 10;
+GRID_CROSS_LENGTH = 12;
 // ////////////////////////////DÉCLARATION DES
 // OBJETS////////////////////////////
 function Room() {
 	var m_polygone = new Array();
 	var name = "";
 
-	this.DrawRoom = function() {
-
+	this.DrawRoom = function(ctx, color){
+		 ctx = document.getElementById('myCanvas').getContext('2d');
+		 ctx.fillStyle = color;
+		 ctx.beginPath();
+		 ctx.moveTo(GRID_OFFSET.x + m_polygone[0].x * GRID_SPACING_POINT, GRID_OFFSET.y + m_polygone[0].y * GRID_SPACING_POINT);
+		 for(var i = 1; i < m_polygone.length;i++){
+			 console.log(i);
+			 ctx.lineTo(GRID_OFFSET.x + m_polygone[i].x * GRID_SPACING_POINT,GRID_OFFSET.y + m_polygone[i].y * GRID_SPACING_POINT);
+		 }
+		 ctx.closePath();
+		 ctx.fill();
+		 console.log("polygone draw");
 	};
 	this.FindMiddlePoint = function(){
 		if(!m_polygone.length)return;
@@ -32,18 +42,11 @@ function Room() {
 	this.GetPolygone = function(){
 		return m_polygone;
 	};
-	this.DrawRoom = function(ctx, color){
-		 ctx = document.getElementById('myCanvas').getContext('2d');
-		 ctx.fillStyle = color;
-		 ctx.beginPath();
-		 ctx.moveTo(m_polygone[0].x, m_polygone[0].y);
-		 for(var i = 1; i < m_polygone.length;i++){
-			 console.log(i);
-			 ctx.lineTo(m_polygone[i].x, m_polygone[i].y);
-		 }
-		 ctx.closePath();
-		 ctx.fill();
-		 console.log("polygone draw");
+	this.Raycast = function(point){
+		
+		for(var i=0; i < m_polygone.length; i++){
+			
+		}
 	};
 }
 
@@ -63,11 +66,11 @@ function Floor() {
 	this.AddRoom = function() {
 		if(m_tempRoom.GetPolygone().length<=2){
 			alert("La Pièce doit contenir plus de points !");
-			m_tempRoom.GetPolygone().splice(0,m_tempRoom.GetPolygone().length);
-			return;
+			return false;
 		}
 		m_rooms.push(m_tempRoom);
-		m_tempRoom = new Room(); 
+		m_tempRoom = new Room();
+		return true;
 	};
 	this.PushPointTempRoom = function(posx, posy){
 		m_tempRoom.PushPolygone({x:posx,y:posy});
@@ -76,6 +79,14 @@ function Floor() {
 	};
 	this.ChangeNameTempRoom = function(name){
 		m_tempRoom.m_name = name;
+	};
+	this.RaycastRoom = function(point){
+		if(m_rooms.length < 1) return false;
+		var tempRoom;
+		for(var i = 0; i < m_rooms.length; i++){
+			tempRoom = m_rooms[i];
+			
+		}
 	};
 }
 
@@ -102,7 +113,7 @@ function WindowCanvas() {
 		IDLE : 0,
 		DRAWING_ROOM : 1
 	};
-	var m_selectedFloor = 0;
+	var m_selectedFloor = -1;
 
 	this.GetCursorPosition = function() {
 		return m_cursorPosition;
@@ -143,6 +154,7 @@ function WindowCanvas() {
 				GRID_SPACING_POINT * GRID_NB_ROW+ GRID_CROSS_LENGTH /2);
 		m_ctx.lineWidth = 2;
 	    m_ctx.strokeStyle = 'DimGray';
+	    //déssin de la grille
 		for ( var i = 0; i < GRID_NB_ROW; i++) {
 			for ( var j = 0; j < GRID_NB_COL; j++) {		
 				m_ctx.beginPath();
@@ -163,10 +175,21 @@ function WindowCanvas() {
 				m_ctx.stroke();
 			}
 		}
+		//affichage du numéro de l'étage
+		m_ctx.fillStyle = "White";
+		m_ctx.fillRect(390, 618, 110,30)
+		m_ctx.fillStyle = "Black";
+		m_ctx.font = '15px consolas';
+		m_ctx.fillText('Étage : ' + ("00" + m_selectedFloor).slice(-2) + "/" + ("00" + (m_floors.length-1)).slice(-2), 390, 638);
 	};
 	
 	this.NewFloor = function(){
-		m_floors.push(new Floor());
+		if(m_floors.length>99){
+			alert("Vous ne pouvez plus faire d'étage")
+			return;
+		}
+		m_floors.splice(++m_selectedFloor, 0, new Floor());
+		this.DrawGrid();
 		console.log("étage push :");
 		console.log(m_floors);
 	};
@@ -177,6 +200,8 @@ function WindowCanvas() {
 			return;
 		}
 		m_floors.splice(m_selectedFloor, 1);
+		if(m_selectedFloor) m_selectedFloor--;
+		this.DrawSelectedFloor();
 		console.log("étage supprimé");
 		console.log(m_floors);
 	};
@@ -188,17 +213,27 @@ function WindowCanvas() {
 	}
 	this.GetCursorToGrid = function(){
 		if(m_cursorPosition.x==null)return;
-		if((m_cursorPosition.x < GRID_OFFSET.x - GRID_SPACING_POINT / 2)||
-				(m_cursorPosition.x > GRID_OFFSET.x + GRID_SPACING_POINT * GRID_NB_COL - GRID_SPACING_POINT / 2)||
-				(m_cursorPosition.y < GRID_OFFSET.y - GRID_SPACING_POINT / 2)||
-				(m_cursorPosition.y > GRID_OFFSET.y + GRID_SPACING_POINT * GRID_NB_ROW - GRID_SPACING_POINT / 2)
-				){
-			return {x : null, y : null};
-		}
 		var tempPoint = {x : null, y : null};
 		tempPoint.x = Math.floor((m_cursorPosition.x - GRID_OFFSET.x + GRID_SPACING_POINT / 2) / GRID_SPACING_POINT);
 		tempPoint.y = Math.floor((m_cursorPosition.y - GRID_OFFSET.y + GRID_SPACING_POINT / 2) / GRID_SPACING_POINT);
+		if((tempPoint.x<0)||
+				(tempPoint.y<0)||
+				(tempPoint.x>GRID_NB_COL-1)||
+				(tempPoint.y>GRID_NB_ROW-1)
+				){
+			return {x : null, y : null};
+		}
 		return tempPoint;
+	};
+	this.GoPrevFloor = function(){
+		if(m_selectedFloor==0)return;
+		m_selectedFloor--;
+		this.DrawSelectedFloor();
+	};
+	this.GoNextFloor = function(){
+		if(m_selectedFloor==m_floors.length-1)return;
+		m_selectedFloor++;
+		this.DrawSelectedFloor();
 	};
 	this.NewFloor();
 	// désactivation du menu clique droit
@@ -227,11 +262,12 @@ $('#myCanvas').mousedown(function(event) {
             if((mainWindow.GetStatus() == mainWindow.GetStatusValue().DRAWING_ROOM) &&
             		(mainWindow.GetCursorToGrid().x!=null)
             		){
-            	mainWindow.GetCtx().beginPath();
-            	mainWindow.GetCtx().arc(mainWindow.GetCursorPosition().x,mainWindow.GetCursorPosition().y, GRID_CROSS_LENGTH/2, 2*Math.PI, false);
+            	mainWindow.GetCtx().beginPath();//dessin du cercle
+            	mainWindow.GetCtx().arc(GRID_OFFSET.x + mainWindow.GetCursorToGrid().x * GRID_SPACING_POINT,GRID_OFFSET.y + mainWindow.GetCursorToGrid().y * GRID_SPACING_POINT, GRID_CROSS_LENGTH/2, 2*Math.PI, false);
             	mainWindow.GetCtx().strokeStyle = "yellow";
             	mainWindow.GetCtx().stroke();
-            	mainWindow.GetFloors()[mainWindow.GetSelectedFloor()].PushPointTempRoom(mainWindow.GetCursorPosition().x,mainWindow.GetCursorPosition().y);
+            	
+            	mainWindow.GetFloors()[mainWindow.GetSelectedFloor()].PushPointTempRoom(mainWindow.GetCursorToGrid().x,mainWindow.GetCursorToGrid().y);
             }
             break;
         case 2:
@@ -241,10 +277,12 @@ $('#myCanvas').mousedown(function(event) {
         	console.log('Right Mouse button pressed.');
         	if(mainWindow.GetStatus() == mainWindow.GetStatusValue().DRAWING_ROOM){
         		//ajout de la pièce
-        		mainWindow.GetFloors()[mainWindow.GetSelectedFloor()].AddRoom();
-        		//déssin de la pièce
-        		mainWindow.DrawSelectedFloor();
-        		mainWindow.SetStatus(mainWindow.GetStatusValue().IDLE);
+        		if(mainWindow.GetFloors()[mainWindow.GetSelectedFloor()].AddRoom()){
+            		//déssin de la pièce SI la pièce peut être placé
+            		mainWindow.DrawSelectedFloor();
+            		mainWindow.SetStatus(mainWindow.GetStatusValue().IDLE);        			
+        		}
+
         	}
             break;
         default:

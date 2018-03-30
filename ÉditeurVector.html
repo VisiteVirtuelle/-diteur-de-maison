@@ -5,16 +5,21 @@
 	<canvas id="myCanvas" width="1200" height="800"
 		style="border: 1px solid #000000;">
   Your browser does not support the HTML5 canvas tag.</canvas>
-	<script src="js/renderers/CanvasRenderer.js"></script>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
 	<script type="text/javascript" src="editorVector.js"></script>
 
-	<button style="position: absolute; top: 405px; left: 20px;"
+	<button style="position: absolute; top: 630px; left: 20px;"
 		onclick="mainWindow.NewFloor()">Nouvelle étage</button>
-	<button style="position: absolute; top: 430px; left: 20px;"
+	<button style="position: absolute; top: 655px; left: 20px;"
 		onclick="mainWindow.DeleteFloor()">Supprimer étage</button>
-	<button style="position: absolute; top: 405px; left: 150px;"
+		
+	<button style="position: absolute; top: 630px; left: 515px;"
+		onclick="mainWindow.GoNextFloor()">Étage suivant</button>
+	<button style="position: absolute; top: 630px; left: 280px;"
+		onclick="mainWindow.GoPrevFloor()">Étage précedant</button>
+		
+	<button style="position: absolute; top: 630px; left: 150px;"
 		onclick="mainWindow.NewRoom()">Ajouter une pièce</button>
 </body>
 </html>
