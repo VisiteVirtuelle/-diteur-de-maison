@@ -20,6 +20,7 @@
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EIntegerObject"/>
         </ownedParameter>
       </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_U0XTEDmXEeiDKtScNxp46A" name="SetName"/>
       <nestedClassifier xmi:type="uml:Class" xmi:id="_9zxx8DG3Eeik29jLlIibuQ" name="Floor">
         <ownedAttribute xmi:type="uml:Property" xmi:id="_ADH-YDG4Eeik29jLlIibuQ" name="m_rooms" type="_XhRq4DG4Eeik29jLlIibuQ"/>
         <ownedAttribute xmi:type="uml:Property" xmi:id="_UegbcDHOEeik29jLlIibuQ" name="m_tempRoom" type="_XhRq4DG4Eeik29jLlIibuQ"/>
@@ -27,8 +28,7 @@
         <ownedOperation xmi:type="uml:Operation" xmi:id="_Vyk38DG5Eeik29jLlIibuQ" name="DrawFloor"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_-mCDYDG5Eeik29jLlIibuQ" name="AddRoom"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_OHT98DHQEeik29jLlIibuQ" name="PushPointTempRoom"/>
-        <ownedOperation xmi:type="uml:Operation" xmi:id="_hFdC8DHQEeik29jLlIibuQ" name="ChangeNameTempRoom"/>
-        <ownedOperation xmi:type="uml:Operation" xmi:id="_tqTx0DQZEeitX_Zri-Pw9g" name="RaycastRoom">
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_tqTx0DQZEeitX_Zri-Pw9g" name="RaycastRooms">
           <ownedParameter xmi:type="uml:Parameter" xmi:id="_yiclcDQZEeitX_Zri-Pw9g" name="point">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EIntegerObject"/>
           </ownedParameter>
@@ -46,7 +46,13 @@
           <ownedAttribute xmi:type="uml:Property" xmi:id="_rbwm4DG5Eeik29jLlIibuQ" name="m_status">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
           </ownedAttribute>
-          <ownedAttribute xmi:type="uml:Property" xmi:id="_9YlG4DG7Eeik29jLlIibuQ" name="m_selectedFloor"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_9YlG4DG7Eeik29jLlIibuQ" name="m_selectedFloor">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_37sJYDirEeib84DFFzvQhA" name="m_hoveredRoom">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_Rchm0DmSEeiDKtScNxp46A" name="m_selectedRoom"/>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_C1rNkBCSEeioo-48y0HB3g" name="GetCursorPosition"/>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_qTBh4CuSEei584fYRHJcxQ" name="GetCanvas"/>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_r91d4CuSEei584fYRHJcxQ" name="GetCtx"/>
@@ -69,6 +75,13 @@
           <ownedOperation xmi:type="uml:Operation" xmi:id="_U50BoDMyEeivxp_mbyYrMg" name="GetCursorToGrid"/>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_wtEZMDQOEeitX_Zri-Pw9g" name="GoPrevFloor"/>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_x-dvoDQOEeitX_Zri-Pw9g" name="GoNextFloor"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_nRi_MDgaEeiTyqN29qFEsA" name="GetCursorToGridForRaycast"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_Thg14DisEeib84DFFzvQhA" name="RaycastHoveredFloor"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_yz7v8DisEeib84DFFzvQhA" name="GetHoveredRoom"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_ShkjUDmSEeiDKtScNxp46A" name="SetSelectedRoom"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_003QkDmWEeiDKtScNxp46A" name="SetNameSelectedRoom"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_2a3lEDmWEeiDKtScNxp46A" name="DeleteSelectedRoom"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_bvQMIDmYEeiDKtScNxp46A" name="Save"/>
           <nestedClassifier xmi:type="uml:Enumeration" xmi:id="_x1nVoDQOEeitX_Zri-Pw9g" name="m_statusValue"/>
         </nestedClassifier>
       </nestedClassifier>

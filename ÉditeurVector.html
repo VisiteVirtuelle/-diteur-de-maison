@@ -5,8 +5,9 @@
 	<canvas id="myCanvas" width="1200" height="800"
 		style="border: 1px solid #000000;">
   Your browser does not support the HTML5 canvas tag.</canvas>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	
+	<script src="jquery-3.3.1.min.js"></script>
+	<script src="jquery.contextMenu.js"></script>
+	<script src="jquery.ui.position.js"></script>	
 	<script type="text/javascript" src="editorVector.js"></script>
 
 	<button style="position: absolute; top: 630px; left: 20px;"
@@ -21,5 +22,13 @@
 		
 	<button style="position: absolute; top: 630px; left: 150px;"
 		onclick="mainWindow.NewRoom()">Ajouter une pièce</button>
+		
+	<button style="position: absolute; top: 655px; left: 515px;"
+		onclick="mainWindow.Save()">Sauvegarder</button>
+		
+	<button style="position: absolute; top: 50px; left: 630px;"
+		onclick="mainWindow.SetNameSelectedRoom()">Changer le nom de la pièce</button>
+	<button style="position: absolute; top: 80px; left: 630px;"
+		onclick="mainWindow.DeleteSelectedRoom()">Supprimer la pièce</button>
 </body>
 </html>
