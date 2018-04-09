@@ -307,12 +307,12 @@ function WindowCanvas() {
 		m_ctx.fillStyle = "white";
 		m_ctx.fillRect(620, 5, 560,30)
 		m_ctx.fillStyle = "Black";
-		m_ctx.fillText("Pièce sélectionné :", 620, 20);
+		//m_ctx.fillText("Pièce sélectionné :", 620, 20);
 		if(m_selectedRoom == -1){
-			m_ctx.fillText("Aucune pièce sélectionné", 780, 20);
+			m_ctx.fillText("Pièce sélectionné : Aucune pièce sélectionné", 620, 20);
 		}else{
 			console.log(this.GetSelectedFloor().GetRooms()[m_selectedRoom].GetName());
-			m_ctx.fillText(this.GetSelectedFloor().GetRooms()[m_selectedRoom].GetName(), GRID_OFFSET.x + GRID_SPACING_POINT * GRID_NB_COL + 160, GRID_OFFSET.y);
+			m_ctx.fillText("Pièce sélectionné : " + this.GetSelectedFloor().GetRooms()[m_selectedRoom].GetName(), 620, GRID_OFFSET.y);
 		}
 	};
 }
@@ -322,7 +322,7 @@ mainWindow.NewFloor();
 //mainWindow.DrawSelectedFloor();
 
 $("#myCanvas").mousemove(
-		function() {
+		function(event) {
 			var m_canvas = document.getElementById('myCanvas'), x = event.pageX
 					- m_canvas.offsetLeft, y = event.pageY - m_canvas.offsetTop;
 			mainWindow.SetCursorPosition(x, y);
