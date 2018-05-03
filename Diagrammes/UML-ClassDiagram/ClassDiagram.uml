@@ -52,7 +52,7 @@
       <ownedOperation xmi:type="uml:Operation" xmi:id="_BjAIECxaEeit494qKPD1KA" name="SetSelectedRoomType">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_GRepYCxaEeit494qKPD1KA" name="idRoomType"/>
       </ownedOperation>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_dh--oCxeEeit494qKPD1KA" name="SetMouseDown" visibility="private">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_dh--oCxeEeit494qKPD1KA" name="SetMouseDown" visibility="public">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_iWJRMCxeEeit494qKPD1KA" name="isDown">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
         </ownedParameter>
