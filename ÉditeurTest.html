@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<div id="container"></div>
+	<canvas id="myCanvas" width="1200" height="800"
+		style="border: 1px solid #000000;">
+  Your browser does not support the HTML5 canvas tag.</canvas>
+	<script src="js/renderers/CanvasRenderer.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="editorTest.js"></script>
+
+	<button style="position: absolute; top: 730px; left: 20px;"
+		onclick="mainWindow.NewFloor()">Nouvelle étage</button>
+	<button style="position: absolute; top: 760px; left: 20px;"
+		onclick="mainWindow.DestroyFloor()">Détruire l'étage</button>
+	<button style="position: absolute; top: 730px; left: 150px;"
+		onclick="mainWindow.GoPrevFloor()">Étage précédant </button>
+	<button style="position: absolute; top: 730px; left: 300px;"
+		onclick="mainWindow.GoNextFloor()">Étage suivant</button>
+	<button style="position: absolute; top: 760px; left: 150px;"
+		onclick="mainWindow.Save()">Sauvegarder</button>
+</body>
+</html>
