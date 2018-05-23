@@ -408,7 +408,8 @@ $('#myCanvas').mousedown(function(event) {
         		if(mainWindow.GetSelectedFloor().AddRoom()){
             		// déssin de la pièce SI la pièce peut être placé
             		mainWindow.DrawSelectedFloor();
-            		mainWindow.SetStatus(mainWindow.GetStatusValue().IDLE);        			
+            		mainWindow.SetStatus(mainWindow.GetStatusValue().IDLE);
+					console.log("changement de l'état de l'application en attente");
         		}
 
         	}
