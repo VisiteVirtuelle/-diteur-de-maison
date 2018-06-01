@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_luTUUPrQEeeawv7hUK1Dow" name="RootElement">
+  <packagedElement xmi:type="uml:Package" xmi:id="_sccnUPrQEeeawv7hUK1Dow" name="UML" visibility="package">
+    <packagedElement xmi:type="uml:Class" xmi:id="_GuURQPrUEeeawv7hUK1Dow" name="CSelector" visibility="public">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_iJmVMGWREeiKM5eNmTWuow" name="m_roomNames" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EByteArray"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_tr5TsGWREeiKM5eNmTWuow" name="m_selectedName" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_0L2ZsGWREeiKM5eNmTWuow"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_0MG4YGWREeiKM5eNmTWuow" value="*"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_BdsDMGWSEeiKM5eNmTWuow" name="m_topName" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_GEz0wGWREeiKM5eNmTWuow" name="IsCursorInSelector" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_O1LeMGWREeiKM5eNmTWuow" name="cursor">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EIntegerObject"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_2NoEMGWREeiKM5eNmTWuow" name="InitNamesXML"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_Hr7uIGWSEeiKM5eNmTWuow" name="ScrollDown"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_QjQUIGWSEeiKM5eNmTWuow" name="ScrollUp"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_YUT1oGWSEeiKM5eNmTWuow" name="AssignName"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_f7N8oGWSEeiKM5eNmTWuow" name="DrawSelector"/>
+      <nestedClassifier xmi:type="uml:Enumeration" xmi:id="_sW_ywGWQEeiKM5eNmTWuow" name="m_sizeOf" visibility="package"/>
+    </packagedElement>
+  </packagedElement>
+  <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_ilqsECt7Eei584fYRHJcxQ">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_iltIUCt7Eei584fYRHJcxQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <references xmi:type="ecore:EPackage" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#_Kv8EIKFXEeS_KNX0nfvIVQ"/>
+    </eAnnotations>
+    <appliedProfile xmi:type="uml:Profile" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#ActionLanguage"/>
+  </profileApplication>
+</uml:Model>
