@@ -31,18 +31,26 @@ function CSelector() {
 				(cursPos.y < SELECTOR_OFFSET.y + m_sizeOf.heightDispName * m_sizeOf.nbDispName + m_sizeOf.heightAssignButton)){
 			
 			if(cursPos.x > SELECTOR_OFFSET.x + m_sizeOf.widthDispName){//BOUTON DE SCROLL
-				if(cursPos.y < SELECTOR_OFFSET.y + m_sizeOf.heightDispName) this.ScrollUp();
+				if(cursPos.y < SELECTOR_OFFSET.y + m_sizeOf.heightDispName){
+					this.ScrollUp();
+					//console.log("up");
+				}
 				
 				if((cursPos.y > SELECTOR_OFFSET.y + ((m_sizeOf.nbDispName-1) * m_sizeOf.heightDispName))&&
-						(cursPos.y < SELECTOR_OFFSET.y + (m_sizeOf.nbDispName * m_sizeOf.heightDispName))) this.ScrollDown();
+						(cursPos.y < SELECTOR_OFFSET.y + (m_sizeOf.nbDispName * m_sizeOf.heightDispName))){
+					this.ScrollDown();
+					//console.log("down");
+				}
 				
 			}else if(cursPos.y < SELECTOR_OFFSET.y + m_sizeOf.nbDispName * m_sizeOf.heightDispName){//RECHERCHE DE LA PIECE SELECTIONNÉE
 				var itemp = Math.floor((cursPos.y - SELECTOR_OFFSET.y)/m_sizeOf.heightDispName) + m_topName;
 				if(itemp < m_roomNames.length){
 					m_selectedRoom = itemp;
-					console.log(itemp);
+					//console.log(itemp);
 					this.DrawSelector();
 				}
+			}else if(cursPos.x < SELECTOR_OFFSET.x + m_sizeOf.widthAssignButton){
+				//console.log("Assign");
 			}
 			
 			return true;
