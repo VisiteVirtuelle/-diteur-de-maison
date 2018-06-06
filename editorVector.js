@@ -18,6 +18,10 @@ const
 GRID_SPACING_POINT = 20;
 const
 GRID_CROSS_LENGTH = 12;
+const
+COLOR_SELECTION_1 = "#A98C78";
+const
+COLOR_SELECTION_2 = "#CECECE";
 // ////////////////////////////DÉCLARATION DES
 // OBJETS////////////////////////////
 
@@ -36,10 +40,40 @@ function Room() {
 		 }
 		 ctx.closePath();
 		 ctx.fill();
+		 ctx.font = "15px Consolas";
+		 
+		 ctx.strokeStyle = 'black';
+		 ctx.lineWidth = 5;
+		 ctx.strokeText(m_name.substring(0,20),
+				 GRID_OFFSET.x + GRID_SPACING_POINT*this.FindRightPoint().x,
+				 GRID_OFFSET.y + GRID_SPACING_POINT*this.FindRightPoint().y+8);
+		 ctx.lineWidth = 2;
+		 ctx.fillStyle = "white";
+		 ctx.fillText(m_name.substring(0,20),
+				 GRID_OFFSET.x + GRID_SPACING_POINT*this.FindRightPoint().x,
+				 GRID_OFFSET.y + GRID_SPACING_POINT*this.FindRightPoint().y+8);
 	};
-	this.FindMiddlePoint = function(){
-		if(!m_polygone.length)return;
-		// ...
+	this.FindRightPoint = function(){
+		var tempPoint = {
+				x:0,
+				y:0					
+			};
+		if(!m_polygone.length) return tempPoint;
+		tempPoint.x = m_polygone[0].x;
+		tempPoint.y = m_polygone[0].y;
+		
+		for(var i=1;i<m_polygone.length;i++){
+			if(tempPoint.y>m_polygone[i].y){
+				tempPoint.x=m_polygone[i].x;
+				tempPoint.y=m_polygone[i].y;
+			}else if(tempPoint.y==m_polygone[i].y){
+				if(tempPoint.x>m_polygone[i].x){
+					tempPoint.x=m_polygone[i].x;
+					tempPoint.y=m_polygone[i].y;
+				}
+			}
+		}
+		return tempPoint;
 	};
 	this.PushPolygone = function(point){
 		m_polygone.push(point);
@@ -81,7 +115,7 @@ function Floor() {
 		var tempColor = "";
 		for(var i = 0; i<m_rooms.length;i++){
 			tempColor = colors[i%colors.length];
-			if(i == mainWindow.GetSelectedRoom()) tempColor = "yellow";
+			if(i == mainWindow.GetSelectedRoom()) tempColor = COLOR_SELECTION_1;
 			m_rooms[i].DrawRoom(ctx, tempColor);
 		}
 	};
@@ -119,21 +153,32 @@ function WindowCanvas() {
 	};
 	var m_floors = new Array();
 	var m_roomColors = new Array();
-	for(var r=0;r<10;r++){
-		console.log("rgb("+ (r*25) +","+(r*25)+",255)");
-		m_roomColors.push("rgb("+ (r*25) +","+(r*25)+",255)");
-
+	for(var r=0;r<3;r++){//génération des couleurs
+		for(var g=0; g<3; g++){
+			for(var b=0; b<3; b++){
+				if(r==0)m_roomColors.push("rgb("+ (255-g*85) +","+(255-b*85)+","+(r*85)+")");
+				if(r==1)m_roomColors.push("rgb("+ (g*85) +","+(255-b*85)+","+(255-r*85)+")");
+				if(r==2)m_roomColors.push("rgb("+ (255-g*85) +","+(b*85)+","+(255-r*85)+")");
+				m_ctx.fillStyle = m_roomColors[m_roomColors.length-1];
+				m_ctx.fillRect(620 +(40*b),
+						300 +(40*g)+ (40*3*r),
+						40,
+						40);
+			}
+		}
 	}
-	//m_roomColors.push("rgb(255,10,10)");
-	m_roomColors.push("LightCoral");
-	m_roomColors.push("MediumVioletRed");
-	m_roomColors.push("Tomato");
-	m_roomColors.push("SlateBlue");
-	m_roomColors.push("Green");
-	m_roomColors.push("DodgerBlue");
-	m_roomColors.push("BurlyWood");
-	m_roomColors.push("SaddleBrown");
-	m_roomColors.push("Red");
+	for(var i=0;i<27;i++){
+		m_ctx.fillStyle = m_roomColors[i];
+		m_ctx.fillRect(745+i*15,
+				300,
+				15,
+				15);
+	}
+	m_ctx.fillStyle = COLOR_SELECTION_1;
+	m_ctx.fillRect(745,
+			315,
+			15+26*15,
+			15);
 	var m_status = 0;
 	var m_statusValue = {
 		IDLE : 0,
@@ -342,11 +387,10 @@ function WindowCanvas() {
 	this.DrawSelectedFloor = function(){
 		this.DrawGrid();
 		m_floors[m_selectedFloor].DrawFloor(m_ctx, m_roomColors);
-		// affichage de la pièce selectionné
 		m_ctx.fillStyle = "white";
 		m_ctx.fillRect(620, 5, 560,30)
 		m_ctx.fillStyle = "Black";
-		//m_ctx.fillText("Pièce sélectionné :", 620, 20);
+		m_ctx.font = '15px consolas';
 		if(m_selectedRoom == -1){
 			m_ctx.fillText("Pièce sélectionné : Aucune pièce sélectionné", 620, 20);
 		}else{
@@ -357,7 +401,6 @@ function WindowCanvas() {
 		return m_selectedRoom;
 	};
 }
-
 
 function CSelector() {
 	var m_roomNames = new Array();
@@ -457,7 +500,7 @@ function CSelector() {
 			mainWindow.GetCtx().fillRect(SELECTOR_OFFSET.x + m_sizeOf.widthDispName, SELECTOR_OFFSET.y + i*m_sizeOf.heightDispName * (m_sizeOf.nbDispName-1), m_sizeOf.heightDispName, m_sizeOf.heightDispName);
 		}
 		for(var i = 0; i <= m_sizeOf.nbDispName; i++){//Déssin du sélecteur
-			if(i+m_topName == m_selectedRoom)mainWindow.GetCtx().fillStyle = "#BBFEFF";
+			if(i+m_topName == m_selectedRoom)mainWindow.GetCtx().fillStyle = COLOR_SELECTION_2;
 			else mainWindow.GetCtx().fillStyle = "white";//déssin du fond du sélecteur
 			
 			if(i<m_sizeOf.nbDispName) mainWindow.GetCtx().fillRect(SELECTOR_OFFSET.x, SELECTOR_OFFSET.y + i * m_sizeOf.heightDispName, m_sizeOf.widthDispName, m_sizeOf.heightDispName);
@@ -483,6 +526,7 @@ function CSelector() {
 			mainWindow.GetCtx().moveTo(SELECTOR_OFFSET.x + i*m_sizeOf.widthAssignButton, SELECTOR_OFFSET.y + m_sizeOf.heightDispName * m_sizeOf.nbDispName);
 			mainWindow.GetCtx().lineTo(SELECTOR_OFFSET.x + i*m_sizeOf.widthAssignButton, SELECTOR_OFFSET.y + m_sizeOf.heightDispName * m_sizeOf.nbDispName + m_sizeOf.heightAssignButton);
 		}
+		mainWindow.GetCtx().fillStyle = "black"
 		mainWindow.GetCtx().moveTo(SELECTOR_OFFSET.x, SELECTOR_OFFSET.y + m_sizeOf.heightDispName * m_sizeOf.nbDispName+ m_sizeOf.heightAssignButton);
 		mainWindow.GetCtx().lineTo(SELECTOR_OFFSET.x + m_sizeOf.widthAssignButton, SELECTOR_OFFSET.y + m_sizeOf.heightDispName * m_sizeOf.nbDispName + m_sizeOf.heightAssignButton);
 		mainWindow.GetCtx().fillText("Assigner",SELECTOR_OFFSET.x + m_sizeOf.fontCorrection, SELECTOR_OFFSET.y + m_sizeOf.heightDispName * m_sizeOf.nbDispName+ m_sizeOf.heightAssignButton - m_sizeOf.fontCorrection);
@@ -510,7 +554,6 @@ mainWindow.NewFloor();
 var selector = new CSelector();
 selector.InitNamesXML();
 selector.DrawSelector();
-//mainWindow.DrawSelectedFloor();
 
 $("#myCanvas").mousemove(
 		function(event) {
@@ -540,7 +583,7 @@ $('#myCanvas').mousedown(function(event) {
             		// dessin de la pièce
             		mainWindow.GetCtx().beginPath();// dessin du cercle
             		mainWindow.GetCtx().arc(GRID_OFFSET.x + mainWindow.GetCursorToGrid().x * GRID_SPACING_POINT,GRID_OFFSET.y + mainWindow.GetCursorToGrid().y * GRID_SPACING_POINT, GRID_CROSS_LENGTH/2, 2*Math.PI, false);
-            		mainWindow.GetCtx().strokeStyle = "yellow";
+            		mainWindow.GetCtx().strokeStyle = COLOR_SELECTION_1;
             		mainWindow.GetCtx().stroke();
             		mainWindow.GetSelectedFloor().PushPointTempRoom(mainWindow.GetCursorToGrid().x,mainWindow.GetCursorToGrid().y);
             	}
