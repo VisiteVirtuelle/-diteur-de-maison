@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <visit>
 		<room>
 			<name>Salon</name>
@@ -48,26 +48,4 @@
 			<name>Toilettes</name>
 			<url>img/ir2.jpg</url>
 		</room>		
-	
-	<blueprint>
-		<floor>
-			
-			<Room>
-			<Name>Salle EC</Name>
-			<point>
-				<x>8</x>
-				<y>2</y>
-			</point>
-			<point><x>8</x><y>11</y></point><point><x>21</x><y>12</y></point></Room><Room><Name>Salle IR</Name><point><x>0</x><y>2</y></point><point><x>1</x><y>13</y></point><point><x>4</x><y>13</y></point></Room></floor>
-			<floor>
-			<Room>
-			<Name>Salle IR2</Name>
-			<point>
-				<x>8</x>
-				<y>2</y>
-			</point>
-			<point><x>18</x><y>18</y></point><point><x>21</x><y>12</y></point></Room><Room><Name>Salle EC</Name><point><x>0</x><y>2</y></point><point><x>1</x><y>13</y></point><point><x>4</x><y>13</y></point></Room></floor>
-			
-		
-		</blueprint>
 </visit>

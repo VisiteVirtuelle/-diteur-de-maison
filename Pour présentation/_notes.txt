@@ -1,0 +1,58 @@
+diapo 1:
+bonjour, je vais vous présentez ma partie du projet qui portait sur un éditeur de plan de maison
+
+diapo 2:
+pourquoi éditeur
+présent solus
+bilan
+
+diapo 3:
+faire site web visite immo -> déplacement dans visite
+menu déroulant ou selec pièce -> bouton dans visite -> plan pour déplacement
+ma partie plan -> on doit créer plan -> éditeur
+
+diapo 4:
+Pour créer des plans de biens immobiliers, deux ont étaient envisagées.
+La première est un éditeur fonctionnant avec un principe de matrice. C'est sur celui-ci par lequel j'ai commencé, car il présentait des facilités de programmation,
+mais les problèmes qui en découlait étaient trop nombreux, et nous y reviendrons plus tard.
+La seconde solution, est un éditeur fonctionnant par des tracers vectoriel qui a une base plus difficile à programmer mais présente beaucoup plus d'avantage,
+et la aussi nous y reviendrons plus tard.
+
+diapo 5:
+Le fonctionnement immaginé pour l'éditeur matriciel est simple. Il suffit de sélectionner une pièce dans le sélecteur a droite (en montrant le sélecteur),
+puis d'assigner les cases de la grille en cliquant dessus à la manière d'un dessin.
+
+diapo 6:
+Malgrer cette simplicité apparente, ce système présente de nombreux problème.
+Par exemple, la programmation a très été apréhendé en amont. Il y a uniquement une seul classe ce qui a rendu le dévellopement très complèxe.
+Ensuite, le sélecteur dont dispose cet éditeur en peu contenir uniquement 7 pièces différentes, ce qui n'est pas envisageable.
+Ensuite il est peu efficace dans le sens où l'assignation des pièce a la manière d'un dessin n'est pas du tout adapté pour ce genre travaille,
+et que l'éditeur ne peut permettre qu'il y est une pièce séparer de vide, ce qui est un non-sens, et nous sommes limité par des formes rectangulaires.
+Et surtout si il avait fallu enregistrer les matrices dans un fichier XML, ce qui prendrait beaucoup de place, et si il y a des cases vides,
+on enregistre des données innutile.
+
+diapo 7:
+Donc ça c'est l'éditeur vectoriel tel qu'il est maintenant. Donc le principe est simple, il suffit de cliquer sur le bouton "ajouter un pièce" pour pouvoir déssiner une pièce,
+une fois que c'est fait une couleur lui est assigner automatiquement, en la sélectionnant on peut lui changer son nom en utilisant le sélecteur a droite. Et enfin on peu ajouter des étages si nécessaire et voila, c'est tout simple.
+
+diapo 8:
+L'avantage premier de cet éditeur est qu'il est plus facile a utiliser que le précedant, et permet de faire des pièces beaucoup plus complexes.
+Les sauvegardes ne prennent en compte que les points des pièces ainsi que le nom, et donc nous ne sauvegardons que l'essentiel.
+La programmation a été mieux apréhendé, le programme dispose de plusieurs qui s'occupe d'une chose en particulier.
+Et enfin le sélecteur qui peu avoir un nombre illimité de pièces et viens s'adapter du fichier XML qu'il lit.
+
+diapo 9:
+Les récentes qui ont été faites par rapport à la publication du rapport est principalement le sélecteur de nom des pièces qui permet un meilleur confort d'utilisation, et surtout de respecter les des pièces imposé qui seront donnée durant la création de la visite.
+Ensuite la couleur dont les pièces s'affiche sont maintenant procédurales, car au début c'était moi qui devait les rentrer une à une dans le code lors de l'initialisation.
+Et enfin l'affichage des noms des pièces sur la zone d'édition afin de mieux se représenter le plan.
+
+diapo 10:
+Un des problèmes qui devrait être régler est que pour l'instant certaines fonctionnalités sont gérer avec des boutons HTML qui resent fixes par rapport a la page web, et non au canvas, c'est à dire que si on bouge le canvas de 50px et bien les boutons ne bougent pas. Et ça aurait été bien que je les remplace par des boutons fait maison par exemple.
+Ensuite il reste quelques problèmes d'affiche au niveau des noms des pièces affiché sur le plan. Par exemple, si une pièce est trop a droite, le nom va sortir de la zones d'éditon, et si on fait des modification sur le nom, il n'y aura que la zone d'édition qui va se rafraichir. Ce problème peut être contourné en appliquant un grand rectangle blanc en fond, et en réafichant tout les éléments par dessus, ou encore un rectangle blanc uniquement sur la zone incriminé, et en réafichant les éléments.
+Et les pièces peuvent parfois camoufler certains noms de pièce, qui est due au fait que j'affiche la pièces avec son nom en même temps, et pour pallier a ce problème je dois d'abord afficher les pièces, puis leur nom.
+Et enfin les sauvegardes ne peuvent pas être envoyé au serveur, en javascript c'est impossible. Mais il est possible de passer par des requètes PHP, et AJAX, mais je n'ai pas eu le temps d'aprofondir le sujet.
+
+diapo 11:
+Donc pour conclure, l'éditeur de plan vectoriel a été retenu en raison de ses nombreux avantages, en dépit de l'éditeur matriciel qui semble dépasser à coté.
+Ensuite la programmation de l'éditeur vectoriel a suffisament été entissipé qu'il est facile de modifier facilement des éléments, comme changer la place du sélecteur et de la zone d'édition.
+Mais il reste encore des choses a améliorer, comme par exemple quelques bug d'affichage, et éventuellement le code qui pourrait être améliorer en scindant la classe principale en deux.
