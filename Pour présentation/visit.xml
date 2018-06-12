@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<visit>
+		<room>
+			<name>Salon</name>
+			<url>img/ec.jpg</url>
+		</room>
+		<room>
+			<name>Chambre</name>
+			<url>img/ec.jpg</url>
+		</room>
+		<room>
+			<name>Cuisine</name>
+			<url>img/ec.jpg</url>
+		</room>
+		<room>
+			<name>Bureau</name>
+			<url>img/ec.jpg</url>
+		</room>
+		<room>
+			<name>Couloir</name>
+			<url>img/ec.jpg</url>
+		</room>
+		<room>
+			<name>Buanderie</name>
+			<url>img/ir.jpg</url>
+		</room>
+		<room>
+			<name>Vestibule</name>
+			<url>img/ir2.jpg</url>
+		</room>
+		<room>
+			<name>Garage</name>
+			<url>img/ir2.jpg</url>
+		</room>
+		<room>
+			<name>Kitchenette</name>
+			<url>img/ir2.jpg</url>
+		</room>
+		<room>
+			<name>Réserve</name>
+			<url>img/ir2.jpg</url>
+		</room>
+		<room>
+			<name>Salle de bains</name>
+			<url>img/ir2.jpg</url>
+		</room>
+		<room>
+			<name>Toilettes</name>
+			<url>img/ir2.jpg</url>
+		</room>		
+	
+	<blueprint>
+		<floor>
+			
+			<Room>
+			<Name>Salle EC</Name>
+			<point>
+				<x>8</x>
+				<y>2</y>
+			</point>
+			<point><x>8</x><y>11</y></point><point><x>21</x><y>12</y></point></Room><Room><Name>Salle IR</Name><point><x>0</x><y>2</y></point><point><x>1</x><y>13</y></point><point><x>4</x><y>13</y></point></Room></floor>
+			<floor>
+			<Room>
+			<Name>Salle IR2</Name>
+			<point>
+				<x>8</x>
+				<y>2</y>
+			</point>
+			<point><x>18</x><y>18</y></point><point><x>21</x><y>12</y></point></Room><Room><Name>Salle EC</Name><point><x>0</x><y>2</y></point><point><x>1</x><y>13</y></point><point><x>4</x><y>13</y></point></Room></floor>
+			
+		
+		</blueprint>
+</visit>
