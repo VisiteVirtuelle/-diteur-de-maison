@@ -128,6 +128,12 @@ function Floor() {
 		m_rooms.push(m_tempRoom);
 		m_tempRoom = new Room();
 		mainWindow.SetSelectedRoom(m_rooms.length-1);
+		console.log("----------");
+		console.log("m_rooms :");
+		console.log(m_rooms);
+		console.log("----------");
+		console.log("m_polygone :");
+		console.log(m_rooms[m_rooms.length-1].GetPolygone());
 		return true;
 	};
 	this.PushPointTempRoom = function(posx, posy){
@@ -272,6 +278,9 @@ function WindowCanvas() {
 		}
 		m_selectedRoom=-1;
 		m_floors.splice(++m_selectedFloor, 0, new Floor());
+		console.log("----------");
+		console.log("m_floors :");
+		console.log(m_floors);
 		this.DrawSelectedFloor();
 	};
 	
@@ -284,6 +293,9 @@ function WindowCanvas() {
 		m_selectedRoom=-1;
 		m_floors.splice(m_selectedFloor, 1);
 		if(m_selectedFloor) m_selectedFloor--;
+		console.log("----------");
+		console.log("m_floors :");
+		console.log(m_floors);
 		this.DrawSelectedFloor();
 	};
 
@@ -350,6 +362,9 @@ function WindowCanvas() {
 			return;
 		}
 		this.GetSelectedFloor().GetRooms().splice(m_selectedRoom, 1);
+		console.log("----------");
+		console.log("m_rooms :");
+		console.log(this.GetSelectedFloor().GetRooms());
 		m_selectedRoom = -1;
 		this.DrawSelectedFloor();
 	};
