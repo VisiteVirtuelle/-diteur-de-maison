@@ -180,6 +180,8 @@ function WindowCanvas() {
 	};
 	this.RaycastHoveredFloor = function(){
 		m_hoveredRoom = m_floors[m_selectedFloor].RaycastRooms(this.GetCursorToGridForRaycast());
+		if(m_hoveredRoom!=-1)console.log("Pièce sélectionnée : " + m_floors[m_selectedFloor].GetRooms()[m_hoveredRoom].GetName());
+		else console.log("Pas de pièce sélectionnée");
 	};
 	this.GoPrevFloor = function(){
 		if(m_selectedFloor==0)return;
@@ -254,3 +256,27 @@ var mainWindow = new WindowCanvas();
 mainWindow.ReadXml();
 mainWindow.GoPrevFloor();
 mainWindow.DrawSelectedFloor();
+
+
+
+
+$("#myCanvas").mousemove(
+		);
+
+$('#myCanvas').mousedown(function(event) {
+    switch (event.which) {
+        case 1:
+			var x=0;
+			var y=0;
+			var m_canvas = document.getElementById('myCanvas'), x = event.pageX
+					- m_canvas.offsetLeft, y = event.pageY - m_canvas.offsetTop;
+			mainWindow.SetCursorPosition(x, y);	
+			mainWindow.RaycastHoveredFloor();
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        default:
+    }
+});
